@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CH04.NotificationPropertiesDemo
 {
@@ -21,12 +8,13 @@ namespace CH04.NotificationPropertiesDemo
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public string Department { get { return "Software Engineering"; } }
+        public string Department => "Software Engineering";
 
         private string personName;
+
         public string PersonName
         {
-            get { return personName; }
+            get => personName;
             set { personName = value; OnPropertyChanged("PersonName"); }
         }
 
@@ -46,6 +34,7 @@ namespace CH04.NotificationPropertiesDemo
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged(string propertyName)
         {
             //in C# 7.0 and above

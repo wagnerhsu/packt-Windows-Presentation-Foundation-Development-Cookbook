@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NLog;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CH04.DependencyPropertyDemo
 {
@@ -20,7 +8,8 @@ namespace CH04.DependencyPropertyDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string Department { get { return "Software Engineering"; } }
+        static ILogger Logger = LogManager.GetCurrentClassLogger();
+        public string Department => "Software Engineering";
 
         public string PersonName
         {
@@ -29,11 +18,11 @@ namespace CH04.DependencyPropertyDemo
         }
 
         public static readonly DependencyProperty PersonNameProperty =
-            DependencyProperty.Register("PersonName", typeof(string), typeof(MainWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("PersonName", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty,OnPropertyChangedCallback));
 
         private static void OnPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            
+            Logger.Info(d.GetValue(PersonNameProperty));
         }
 
         public MainWindow()
