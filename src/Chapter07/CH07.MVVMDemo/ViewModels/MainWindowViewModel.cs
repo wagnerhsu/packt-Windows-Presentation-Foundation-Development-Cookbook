@@ -7,6 +7,7 @@ namespace CH07.MVVMDemo.ViewModels
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private UserModel m_newUserDetails;
+
         public UserModel NewUserDetails
         {
             get { return m_newUserDetails; }
@@ -18,6 +19,7 @@ namespace CH07.MVVMDemo.ViewModels
         }
 
         private UserModel m_selectedUser;
+
         public UserModel SelectedUser
         {
             get { return m_selectedUser; }
@@ -29,6 +31,7 @@ namespace CH07.MVVMDemo.ViewModels
         }
 
         private ObservableCollection<UserModel> m_userCollection;
+
         public ObservableCollection<UserModel> UserCollection
         {
             get { return m_userCollection; }
@@ -64,8 +67,8 @@ namespace CH07.MVVMDemo.ViewModels
             NewUserDetails = new UserModel();
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this,
