@@ -1,6 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GridControl01
 {
@@ -21,6 +26,10 @@ namespace GridControl01
         public MainWindow()
         {
             InitializeComponent();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
             Employees = new ObservableCollection<Employee>
             {
                 new Employee
@@ -55,6 +64,19 @@ namespace GridControl01
             dataGrid.ItemsSource = Employees;
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            foreach (Employee item in dataGrid.ItemsSource)
+            {
+                DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                if (item.ID == "EMP0002")
+                {
+                    if (row != null)
+                        row.Background = Brushes.Red;
+                }
+            }
+        }
+
         private void ModifyData_Click(object sender, RoutedEventArgs e)
         {
             // Modify EMP002
@@ -64,5 +86,21 @@ namespace GridControl01
             employee.LastName = "Xu";
             Employees.Add(employee);
         }
+
+        private void ModifyRowColor_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Employee item in dataGrid.ItemsSource)
+            {
+                DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                if (item.ID == "EMP0002")
+                {
+                    if (row != null)
+                        row.Background = Brushes.Red;
+                }
+            }
+
+        }
+
+        
     }
 }
