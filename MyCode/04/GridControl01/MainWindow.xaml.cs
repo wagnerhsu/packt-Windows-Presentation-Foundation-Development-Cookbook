@@ -74,6 +74,11 @@ namespace GridControl01
                     if (row != null)
                         row.Background = Brushes.Red;
                 }
+                else if (item.ID == "EMP0001")
+                {
+                    if (row != null)
+                        row.Background = Brushes.LightGreen;
+                }
             }
         }
 
